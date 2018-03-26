@@ -1,0 +1,6 @@
+name: yorkbeachbucket
+recipe: pantheon
+config:
+  framework: wordpress
+  site: yorkbeachbucket
+  id: c2a3479a-778b-48af-bb0a-40dc476053c0
