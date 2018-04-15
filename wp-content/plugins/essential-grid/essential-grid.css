@@ -1,0 +1,22 @@
+/* Essential Grid styles
+----------------------------------------------------------------- */
+
+.flat-light .esg-filters .esg-sortbutton-order,
+.flat-light .esg-filters .esg-cartbutton-order {
+	line-height:36px;
+	margin:0;
+}
+.flat-light .esg-filters .esg-sortbutton {
+	padding-right: 0;
+}
+.eg-fooddy-wrapper i[class*="eg-icon"] {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.eg-fooddy-wrapper  {
+    border-radius: 3rem !important;
+    overflow: hidden !important;
+}
