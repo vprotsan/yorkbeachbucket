@@ -227,7 +227,7 @@ class PUM_AssetCache {
 		/** @var WP_Filesystem_Base $wp_filesystem */
 		global $wp_filesystem;
 
-		return $wp_filesystem->put_contents( $file, $contents, FS_CHMOD_FILE );
+		return $wp_filesystem->put_contents( $file, $contents, defined('FS_CHMOD_FILE' ) ? FS_CHMOD_FILE : false );
 	}
 
 	/**
@@ -239,19 +239,6 @@ class PUM_AssetCache {
 		// Include core styles so we can eliminate another stylesheet.
 		$core_css = file_get_contents( Popup_Maker::$DIR . 'assets/css/site' . self::$suffix . '.css' );
 
-		// Reset ob.
-		ob_start();
-
-		// Render any extra styles globally added.
-		if ( ! empty( $GLOBALS['pum_extra_styles'] ) ) {
-			echo $GLOBALS['pum_extra_styles'];
-		}
-
-		// Allows rendering extra css via action.
-		do_action( 'pum_styles' );
-
-		$custom_css = ob_get_clean();
-
 		/**
 		 *  0 Core
 		 *  1 Popup Themes
@@ -259,6 +246,10 @@ class PUM_AssetCache {
 		 * 10 Per Popup CSS
 		 */
 		$css = array(
+			'imports' => array(
+				'content' => self::generate_font_imports(),
+				'priority' => -1,
+			),
 			'core'   => array(
 				'content'  => $core_css,
 				'priority' => 0,
@@ -272,7 +263,7 @@ class PUM_AssetCache {
 				'priority' => 15,
 			),
 			'custom' => array(
-				'content'  => $custom_css,
+				'content'  => self::custom_css(),
 				'priority' => 20,
 			),
 		);
@@ -296,8 +287,6 @@ class PUM_AssetCache {
 		}
 
 		return $css_code;
-
-
 	}
 
 	/**
@@ -347,9 +336,28 @@ class PUM_AssetCache {
 	public static function inline_css() {
 		ob_start();
 
+		echo self::generate_font_imports();
 		echo self::generate_popup_theme_styles();
 
 		echo self::generate_popup_styles();
+
+		// Render any extra styles globally added.
+		if ( ! empty( $GLOBALS['pum_extra_styles'] ) ) {
+			echo $GLOBALS['pum_extra_styles'];
+		}
+
+		// Allows rendering extra css via action.
+		do_action( 'pum_styles' );
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function custom_css() {
+		// Reset ob.
+		ob_start();
 
 		// Render any extra styles globally added.
 		if ( ! empty( $GLOBALS['pum_extra_styles'] ) ) {
@@ -367,23 +375,16 @@ class PUM_AssetCache {
 	 *
 	 * @return mixed|string
 	 */
-	public static function generate_popup_theme_styles() {
-		$styles = '';
+	public static function generate_font_imports() {
+		$imports = '';
 
 		$google_fonts = array();
 
 		foreach ( popmake_get_all_popup_themes() as $theme ) {
-			$theme_styles = pum_render_theme_styles( $theme->ID );
-
 			$google_fonts = array_merge( $google_fonts, popmake_get_popup_theme_google_fonts( $theme->ID ) );
-
-			if ( $theme_styles != '' ) {
-				$styles .= "/* Popup Theme " . $theme->ID . ": " . $theme->post_title . " */\r\n";
-				$styles .= $theme_styles . "\r\n";
-			}
 		}
 
-		if ( ! empty( $google_fonts ) && ! popmake_get_option( 'disable_google_font_loading', false ) ) {
+		if ( ! empty( $google_fonts ) && ! pum_get_option( 'disable_google_font_loading', false ) ) {
 			$link = "//fonts.googleapis.com/css?family=";
 			foreach ( $google_fonts as $font_family => $variants ) {
 				if ( $link != "//fonts.googleapis.com/css?family=" ) {
@@ -398,13 +399,36 @@ class PUM_AssetCache {
 				}
 			}
 
-			$styles = "/* Popup Google Fonts */\r\n@import url('$link');\r\n\r\n" . $styles;
+			$imports = "/* Popup Google Fonts */\r\n@import url('$link');\r\n\r\n" . $imports;
+		}
+
+		$imports = apply_filters( 'pum_generate_font_imports', $imports );
+
+		return $imports;
+	}
+
+	/**
+	 * Generate Popup Theme Styles
+	 *
+	 * @return mixed|string
+	 */
+	public static function generate_popup_theme_styles() {
+		$styles = '';
+
+		foreach ( popmake_get_all_popup_themes() as $theme ) {
+			$theme_styles = pum_render_theme_styles( $theme->ID );
+
+			if ( $theme_styles != '' ) {
+				$styles .= "/* Popup Theme " . $theme->ID . ": " . $theme->post_title . " */\r\n";
+				$styles .= $theme_styles . "\r\n";
+			}
 		}
 
 		$styles = apply_filters( 'popmake_theme_styles', $styles );
 
 		return $styles;
 	}
+
 
 	/**
 	 * Reset the cache to force regeneration.
