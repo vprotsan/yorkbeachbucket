@@ -20,7 +20,7 @@ function bodhi_svgs_response_for_svg( $response, $attachment, $meta ) {
 		$dimensions = bodhi_svgs_get_dimensions( $svg_path );
 
 		$response['sizes'] = array(
-			'custom' => array(
+			'full' => array(
 				'url' => $response['url'],
 				'width' => $dimensions->width,
 				'height' => $dimensions->height,

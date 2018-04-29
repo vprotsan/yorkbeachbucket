@@ -3,9 +3,9 @@ Contributors: Benbodhi
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Z9R7JERS82EQQ
 Tags: svg, vector, css, style, mime, mime type, embed, img, inline, animation, animate, js
 Requires at least: 4.8
-Tested up to: 5.0-alpha-42985
+Tested up to: 5.0-alpha-42993
 Requires PHP: 5.2
-Stable tag: 2.3.14
+Stable tag: 2.3.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -144,6 +144,9 @@ You need to add the mime type for svg and svgz to: "MLA Settings > Media Library
 
 
 == Changelog ==
+
+= 2.3.15 =
+* Had to roll back a recent PHP warnings fix due to it breaking some theme compatibility.
 
 = 2.3.14 =
 * Fixed: Fatal error in some cases when removing old option from the database.
@@ -301,6 +304,9 @@ You need to add the mime type for svg and svgz to: "MLA Settings > Media Library
 
 
 == Upgrade Notice ==
+
+= 2.3.15 =
+Had to roll back a recent PHP warnings fix due to it breaking some theme compatibility.
 
 = 2.3.14 =
 Fixes fatal error in some cases when removing old option from the database.
