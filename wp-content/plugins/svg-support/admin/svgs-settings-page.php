@@ -70,7 +70,7 @@
 										<td>
 											<?php printf(
 												'<input id="bodhi_svgs_settings[restrict]" name="bodhi_svgs_settings[restrict]" type="checkbox" %2$s />', 'bodhi_svgs_settings_restrict', checked( isset( $bodhi_svgs_options['restrict'] ), true, false ) ); ?>
-											<?php _e( 'Yes', 'svg-support' ); ?><br /><small class="description"><?php _e(' Restricts SVG upload priveledges to Administrators.', 'svg-support' ); ?></small>
+											<?php _e( 'Yes', 'svg-support' ); ?><br /><small class="description"><?php _e(' Restricts SVG upload privileges to Administrators.', 'svg-support' ); ?></small>
 										</td>
 									</tr>
 

@@ -4,7 +4,7 @@ Donate link: http://ljapps.com/
 Tags: TripAdvisor, reviews, slider, testimonials, tripadvisor, tripadvisor reviews, tripadvisor slider, tripadvisor review slider
 Requires at least: 3.0.1
 Tested up to: 4.9
-Stable tag: 2.7
+Stable tag: 2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,7 +35,10 @@ Pro Version features:
 
 * Super fast support through email and a forum built in to the plugin.
 * Download and display your Facebook Page, Google, & Yelp reviews as well.
+* Create a really cool summary badge of your reviews!
+* Front end submission form (coming soon).
 * Get email notifications when new low reviews are found.
+* More date display options (MM/DD/YYYY, DD/MM/YY, DD/MM/YYYY, YYYY-MM-DD, DD Mmm YYYY, Time Since)
 * Hide or show individual reviews.
 * Manually insert reviews to display.
 * Click a button and save all your reviews to your computer in a CSV file.
@@ -47,6 +50,7 @@ Pro Version features:
 * Display a summary of your review ratings in a Google Search Result. You can automatically create the correct review snippet markup!
 * Fully adjustable read more link. 
 * Pick and choose which reviews to show per a template!
+* Display reviews by a certain type or mix them all together on one slider (Facebook, Yelp, Google, TripAdvisor, manually input).
 * Access to all new feature we add in the future.
 
 == Installation ==
@@ -71,6 +75,11 @@ We are always looking for features to add. Just post on the support forum or con
 5. Create as many templates as you like.
 
 == Changelog ==
+= 2.9 =
+* Small bug fix.
+
+= 2.8 =
+* Small bug fix.
 
 = 2.7 =
 * Small bug fix.

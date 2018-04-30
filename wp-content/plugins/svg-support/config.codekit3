@@ -284,6 +284,17 @@
 		"oA": 2,
 		"oAP": "\/svg-support.php",
 		"oF": 0
+		},
+	"\/svg-support.png": {
+		"ft": 32768,
+		"iS": 38215,
+		"oA": 0,
+		"oAP": "\/svg-support.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
 		}
 	},
 "hooks": [
@@ -294,7 +305,7 @@
 	"creationDate": 507572464,
 	"displayValue": "svg-support",
 	"displayValueWasSetByUser": 0,
-	"iconImageName": "meme-ariel",
+	"iconImageName": "\/svg-support.png",
 	"iconImageWasSetByUser": 0
 	},
 "projectSettings": {
