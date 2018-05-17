@@ -162,7 +162,12 @@ class PUM_Admin_Popups {
 			) ) ); ?>;
 		</script>
 
-		<div id="pum-popup-settings-container" class="pum-popup-settings-container"></div><?php
+		<div id="pum-popup-settings-container" class="pum-popup-settings-container">
+			<div class="pum-no-js" style="padding: 0 12px;">
+				<p><?php printf( __( 'If you are seeing this, the most likely cause is that there are Javascript errors on this page. %sView troubleshooting guide%s', 'popup-maker' ), '<a href="https://docs.wppopupmaker.com/article/373-checking-for-javascript-errors" target="_blank">', '</a>' ); ?></p>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
@@ -304,7 +309,8 @@ class PUM_Admin_Popups {
 				'main' => __( 'General Settings', 'popup-maker' ),
 			),
 			'triggers'  => array(
-				'main' => __( 'Triggers', 'popup-maker' ),
+				'main' => __( 'Triggers & Cookies', 'popup-maker' ),
+				'advanced'  => __( 'Advanced', 'popup-maker' ),
 			),
 			'targeting' => array(
 				'main' => __( 'Conditions', 'popup-maker' ),
@@ -352,6 +358,13 @@ class PUM_Admin_Popups {
 							'type'     => 'cookies',
 							'std'      => array(),
 							'priority' => 20,
+						),
+					),
+					'advanced' => array(
+						'disable_form_reopen' => array(
+							'label'    => __( 'Disable automatic re-triggering of popup after non-ajax form submission.', 'popup-maker' ),
+							'type'     => 'checkbox',
+							'priority' => 10,
 						),
 					),
 				) ),
@@ -639,10 +652,10 @@ class PUM_Admin_Popups {
 							'label'    => __( 'Popup Z-Index', 'popup-maker' ),
 							'desc'     => __( 'Change the z-index layer level for the popup.', 'popup-maker' ),
 							'type'     => 'number',
-							'std'      => 1999999999,
-							'priority' => 40,
 							'min'      => 999,
 							'max'      => 2147483647,
+							'std'      => 1999999999,
+							'priority' => 40,
 						),
 					),
 				) ),
